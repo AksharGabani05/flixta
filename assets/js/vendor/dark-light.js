@@ -27,7 +27,7 @@
 		// toogle theme scheme
 		function toggleTheme() {
 			if (localStorage.getItem('rs_theme_scheme') === 'rs-theme-light') {
-				rs_set_scheme('rs-theme-dark');
+				rs_set_scheme('rs-theme-light');
 			} else {
 				rs_set_scheme('rs-theme-light');
 			}
@@ -35,8 +35,8 @@
 
 		// set the first theme scheme
 		function rs_init_theme() {
-			if (localStorage.getItem('rs_theme_scheme') === 'rs-theme-dark') {
-				rs_set_scheme('rs-theme-dark');
+			if (localStorage.getItem('rs_theme_scheme') === 'rs-theme-light') {
+				rs_set_scheme('rs-theme-light');
 				document.getElementById('rs-theme-toggler').checked = true;
 			} else {
 				rs_set_scheme('rs-theme-light');

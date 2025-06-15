@@ -172,7 +172,7 @@ h6, .body__overlay {
   --rs-white: #FFFFFF;
   --rs-black: #000000;
   --rs-light: #eee;
-  --rs-theme-primary: #5777FF;
+  --rs-theme-primary: #0d72ff;
   --rs-theme-secondary: #F3DABA;
   --rs-theme-tertiary: #152A40;
   --rs-theme-quaternary: #B69D64;
@@ -1975,7 +1975,7 @@ textarea:focus {
 /*  2.9 Offcanvas
 /*----------------------------------------*/
 .offcanvas-area {
-  background: var(--rs-bg-primary) none repeat scroll 0 0;
+  background: white none repeat scroll 0 0;
   position: fixed;
   inset-inline-end: -100%;
   top: 0;
@@ -6189,7 +6189,7 @@ html.lenis body {
 /*  3.5.1 Header Style 1
 /*----------------------------------------*/
 .rs-header-logo img {
-  max-width: 110px;
+  max-width: 200px;
 }
 
 .logo-white {
