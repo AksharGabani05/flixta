@@ -7502,8 +7502,8 @@ html.lenis body {
 }
 @media only screen and (min-width: 576px) and (max-width: 767px), (max-width: 575px) {
   .rs-banner-five {
-    padding-top: 130px;
-    padding-bottom: 80px;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 }
 .rs-banner-five .rs-banner-bg {
@@ -16296,3 +16296,57 @@ html.lenis body {
 }
 
 /*# sourceMappingURL=main.css.map */
+/* indiamart  */
+
+.indiamart-partner-section {
+  background: #ffffff;
+  padding: 60px 0;
+  border-top: 2px solid #e0e0e0;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.indiamart-logo {
+  width: 100px;
+  height: auto;
+}
+
+.partner-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+}
+
+.partner-title .highlight {
+  color: #0067B8;
+}
+
+.partner-description {
+  font-size: 16px;
+  color: #555;
+}
+
+.partner-features li {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.partner-btn {
+  display: inline-block;
+  background-color: #0067B8;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.partner-btn:hover {
+  background-color: #004d91;
+}
+
+.partner-image {
+  max-width: 100%;
+  border-radius: 12px;
+}
