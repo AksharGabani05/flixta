@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayona Infotech - Digital vCard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #0d72ff;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: var(--dark-color);
+        }
+
+        .vcard-container {
+            max-width: 800px;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        .vcard-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .vcard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .company-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            background: white;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .owner-photo {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .company-name {
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .owner-name {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--light-color);
+            opacity: 0.9;
+        }
+
+        .owner-title {
+            font-weight: 300;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .company-tagline {
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .vcard-body {
+            padding: 30px;
+        }
+
+        .section-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .contact-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--secondary-color);
+            flex-shrink: 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .service-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .download-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .floating-action-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .floating-action-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .vcard-container {
+                margin: 15px;
+            }
+
+            .vcard-header,
+            .vcard-body {
+                padding: 20px;
+            }
+
+            .company-name {
+                font-size: 1.5rem;
+            }
+
+            .logo-container {
+                gap: 15px;
+            }
+
+            .company-logo,
+            .owner-photo {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        .download-btn#shareVCF:hover {
+            background-color: #128C7E !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(18, 140, 126, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Action Button -->
+    <div class="floating-action-btn" id="contactBtn">
+        <i class="fas fa-paper-plane"></i>
+    </div>
+
+    <!-- vCard Container -->
+    <div class="vcard-container">
+        <!-- Header Section -->
+        <div class="vcard-header">
+            <div class="logo-container">
+                <img src="https://newagency-mu.vercel.app/assets/images/header/sayonaicon.png"
+                    alt="Sayona Infotech Logo" class="company-logo">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQEhkPjA8_Hmvg/profile-displayphoto-shrink_400_400/B4DZUcdlGIGkAg-/0/1739939272755?e=1756339200&v=beta&t=GdV6uilyVHSK1WDwcrdv8GoxBfbbt4LoUQuiLTlVjes"
+                    alt="Owner Photo" class="owner-photo">
+            </div>
+            <h1 class="company-name">Sayona Infotech</h1>
+            <h2 class="owner-name">Akshar Gabani</h2>
+            <p class="owner-title">Founder & CEO</p>
+            <p class="company-tagline">Innovative IT Solutions for Your Business</p>
+            <div class="social-links">
+                <a href="https://facebook.com/sayonainfotech" class="social-link" target="_blank"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/sayonainfotech" class="social-link" target="_blank"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/company/sayonainfotech" class="social-link" target="_blank"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/sayonainfotech" class="social-link" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/1234567890" class="social-link" target="_blank"><i
+                        class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <!-- Body Section -->
+        <div class="vcard-body">
+            <div class="row">
+                <!-- About Section -->
+                <div class="col-md-6">
+                    <h3 class="section-title">About Us</h3>
+                    <p>Sayona Infotech is a leading IT solutions provider specializing in web development, mobile apps,
+                        cloud solutions, and digital marketing services. We help businesses transform digitally with
+                        innovative and scalable solutions.</p>
+
+                    <h3 class="section-title mt-4">About Owner</h3>
+                    <p>Akshar Gabani is the Founder and CEO of Sayona Infotech with over 15 years of experience in the
+                        IT industry. His vision and leadership have guided the company to become a trusted name in
+                        technology solutions.</p>
+
+                    <h3 class="section-title mt-4">Contact</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h6>Address</h6>
+                            <p>123 Tech Park, Innovation Road, Bangalore, India - 560001</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h6>Phone</h6>
+                            <p>+91 7600617002 (Office)<br>+91 7600617002 (John Direct)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h6>Email</h6>
+                            <p>info@sayonainfotech.com<br>akshar@sayonainfotech.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div>
+                            <h6>Website</h6>
+                            <p><a href="https://www.sayonainfotech.com" target="_blank">www.sayonainfotech.com</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Section -->
+                <div class="col-md-6">
+                    <h3 class="section-title">Our Services</h3>
+                    <div class="row g-3">
+                        <!-- All services in single column for all screen sizes -->
+                        <div class="col-12"> <!-- Changed to col-12 for full width on all devices -->
+                            <div class="card service-card">
+                                <div class="card-body text-center">
+                                    <div class="service-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <h5>Web Development</h5>
+                                    <p class="text-muted">Custom websites and web applications tailored to your needs.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card service-card">
+                                <div class="card-body text-center">
+                                    <div class="service-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <h5>Mobile Apps</h5>
+                                    <p class="text-muted">iOS and Android applications for your business.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card service-card">
+                                <div class="card-body text-center">
+                                    <div class="service-icon">
+                                        <i class="fas fa-cloud"></i>
+                                    </div>
+                                    <h5>Cloud Solutions</h5>
+                                    <p class="text-muted">Scalable cloud infrastructure and services.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card service-card">
+                                <div class="card-body text-center">
+                                    <div class="service-icon">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <h5>Digital Marketing</h5>
+                                    <p class="text-muted">Boost your online presence with our marketing strategies.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QR Code Section -->
+                    <div class="text-center mt-4">
+                        <h3 class="section-title">Save Our Contact</h3>
+                        <div class="qr-code">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.sayonainfotech.com"
+                                alt="QR Code" class="img-fluid">
+                        </div>
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <button class="download-btn" id="downloadVCF">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button class="download-btn" id="shareVCF" style="background-color: #25D366;">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contact Modal -->
+                    <div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Contact Sayona Infotech</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="contactForm">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" id="name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="phone" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="recipient" class="form-label">Contact</label>
+                                            <select class="form-select" id="recipient">
+                                                <option value="company">Sayona Infotech (General)</option>
+                                                <option value="owner">Akshar Gabani (Owner)</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">Message</label>
+                                            <textarea class="form-control" id="message" rows="3" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bootstrap JS Bundle with Popper -->
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                    <!-- Custom JS -->
+                    <script>
+                        // Initialize tooltips
+                        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                            return new bootstrap.Tooltip(tooltipTriggerEl)
+                        });
+
+                        // Contact button functionality
+                        document.getElementById('contactBtn').addEventListener('click', function () {
+                            var contactModal = new bootstrap.Modal(document.getElementById('contactModal'));
+                            contactModal.show();
+                        });
+
+                        // Download VCF functionality
+                        document.getElementById('downloadVCF').addEventListener('click', function () {
+                            // Create vCard content
+                            var vCard = "BEGIN:VCARD\n" +
+                                "VERSION:3.0\n" +
+                                "FN:Sayona Infotech\n" +
+                                "ORG:Sayona Infotech;\n" +
+                                "TITLE:IT Solutions Provider\n" +
+                                "TEL;TYPE=work,voice:+91 7600617002\n" +
+                                "TEL;TYPE=direct,voice:+91 7600617002\n" +
+                                "ADR;TYPE=work:;;123 Tech Park, Innovation Road;Bangalore;;560001;India\n" +
+                                "EMAIL;TYPE=work:info@sayonainfotech.com\n" +
+                                "EMAIL;TYPE=personal:akshar@sayonainfotech.com\n" +
+                                "URL:https://www.sayonainfotech.com\n" +
+                                "PHOTO;TYPE=JPEG;VALUE=URI:https://via.placeholder.com/120x120.png?text=Owner\n" +
+                                "END:VCARD";
+
+                            // Create download link
+                            var blob = new Blob([vCard], { type: "text/vcard" });
+                            var url = URL.createObjectURL(blob);
+
+                            const a = document.createElement('a');
+                            a.style.display = 'none';
+                            a.href = url;
+                            a.download = 'sayona-infotech.vcf';
+                            document.body.appendChild(a);
+                            a.click();
+
+                            window.URL.revokeObjectURL(url);
+                            document.body.removeChild(a);
+                        });
+
+                        // Share VCF functionality
+                        document.getElementById('shareVCF').addEventListener('click', function () {
+                            if (navigator.share) {
+                                // Use Web Share API if available
+                                navigator.share({
+                                    title: 'Sayona Infotech Contact',
+                                    text: 'Here is the contact information for Sayona Infotech',
+                                    url: 'https://newagency-mu.vercel.app/Vcard.html'
+                                })
+                                    .catch(error => console.log('Error sharing:', error));
+                            } else {
+                                // Fallback for browsers without Web Share API
+                                const vCardData = "BEGIN:VCARD\n" +
+                                    "VERSION:3.0\n" +
+                                    "FN:Sayona Infotech\n" +
+                                    "ORG:Sayona Infotech;\n" +
+                                    "TITLE:IT Solutions Provider\n" +
+                                    "TEL;TYPE=work,voice:+91 7600617002\n" +
+                                    "TEL;TYPE=direct,voice:+91 7600617002\n" +
+                                    "ADR;TYPE=work:;;123 Tech Park, Innovation Road;Bangalore;;560001;India\n" +
+                                    "EMAIL;TYPE=work:info@sayonainfotech.com\n" +
+                                    "EMAIL;TYPE=personal:akshar@sayonainfotech.com\n" +
+                                    "URL:https://www.sayonainfotech.com\n" +
+                                    "PHOTO;TYPE=JPEG;VALUE=URI:https://via.placeholder.com/120x120.png?text=Owner\n" +
+                                    "END:VCARD";
+
+                                const blob = new Blob([vCardData], { type: 'text/vcard' });
+                                const vcfUrl = URL.createObjectURL(blob);
+
+                                // Create a temporary link to download the vCard
+                                const tempLink = document.createElement('a');
+                                tempLink.href = vcfUrl;
+                                tempLink.download = 'sayona-infotech.vcf';
+                                tempLink.click();
+
+                                // Show alternative share options
+                                alert('vCard downloaded. You can now share the file manually.');
+                            }
+                        });
+
+                        // Form submission
+                        document.getElementById('contactForm').addEventListener('submit', function (e) {
+                            e.preventDefault();
+                            // Here you would typically send the form data to your server
+                            var recipient = document.getElementById('recipient').value;
+                            var message = recipient === 'owner' ?
+                                'Thank you for your message to Akshar Gabani! He will contact you soon.' :
+                                'Thank you for your message to Sayona Infotech! We will contact you soon.';
+
+                            alert(message);
+                            var contactModal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
+                            contactModal.hide();
+                            this.reset();
+                        });
+                    </script>
+</body>
+
+</html>
