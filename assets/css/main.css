@@ -19894,8 +19894,57 @@ only screen and (min-width: 576px) and (max-width: 767px),
   transition: transform 0.3s ease-in-out;
 }
 
+/* Mobile-specific adjustment */
+@media (max-width: 767px) {
+  .whatsapp-float {
+    right: 20px;
+  }
+}
+
 .whatsapp-float:hover {
   transform: scale(1.1);
   color: white;
   text-decoration: none;
+}
+
+/* footer icon  */
+
+.social-icons-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Platform-specific colors */
+.facebook { background: #3b5998; }
+.instagram { background: #e1306c; }
+.linkedin { background: #0077b5; }
+.whatsapp { background: #25D366; }
+
+/* Optional: Pulse animation on hover */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.social-icon:hover {
+    animation: pulse 0.5s ease;
 }
